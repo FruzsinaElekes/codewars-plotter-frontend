@@ -1,3 +1,4 @@
+import PlotSection from './components/PlotSection';
 
 function App() {
   return (
