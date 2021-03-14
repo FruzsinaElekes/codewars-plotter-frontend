@@ -1,8 +1,9 @@
-import PlotSection from './components/PlotSection';
+import Stats from './components/Stats'
 
 function App() {
   return (
     <div className="App">
+      <Stats/>
     </div>
   );
 }
