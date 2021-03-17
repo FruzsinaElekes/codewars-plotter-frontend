@@ -23,10 +23,17 @@ export default function Login() {
             },
             headers: {'Content-Type': 'application/json'}
         })
-        .then(response => setToRedirect(true))
+        .then(response => handleSuccess(response))
         .catch(error => {
             if (error.response.status === 403) alert("Incorrect username or password!")
         })
+    }
+
+    const handleSuccess = (response) => {
+        let date = new Date;
+        date.setTime(date.getTime() + response.data.validityInMs)
+        document.cookie = `jwt=${response.data.jwt}, expires=${date.toString()}`
+        setToRedirect(true)
     }
 
     return (
