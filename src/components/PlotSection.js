@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import BarPlot from './BarPlot';
 import CollapsedPlot from './CollapsedPlot';
 import PlotMenu from './PlotMenu';
+import getCookie from '../util/getCookie'
 
 export default function PlotSection({ languages }) {
 
@@ -19,7 +20,13 @@ export default function PlotSection({ languages }) {
     useEffect(() => {
         if (plotList.length === 0){
             urlList.forEach(url => {
-                axios.get(url)
+                axios({
+                    method: 'get',
+                    url: url,
+                    headers: {
+                        'Authorization': `Bearer ${getCookie("jwt")}`
+                    }
+                })
                 .then(resp => setPlotList(prev => [...prev, resp.data]))
             });
         }

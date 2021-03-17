@@ -17,8 +17,7 @@ export default function Stats() {
             url: url,
             headers: {
                 'Authorization': `Bearer ${getCookie("jwt")}`
-            },
-            withCredentials: true
+            }
         })
         .then(resp => setUserSummary(resp.data))
     }, [])
