@@ -25,12 +25,11 @@ export default function Registration() {
             },
             headers: {'Content-Type': 'application/json'}
         })
-        .then(response => {
-            if (response.status === 200) setRedirect(true)
-            // TODO handle bad requests (username exists, incorrect username & apikey combination, database problem)
+        .then(response => setRedirect(true))
+        .catch(error => {
+            if (error.response.status === 409) alert(error.response.data.description)
         })
     }
-
 
     return (
         <React.Fragment>
