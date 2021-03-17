@@ -11,13 +11,14 @@ export default function Stats() {
     const apiKey = process.env.REACT_APP_APIKEY
 
     useEffect(() => {
-        const url = `http://localhost:8080/user/${username}?apiKey=${apiKey}`
+        const url = `http://localhost:8080/user`
         axios({
             method: 'get',
             url: url,
             headers: {
                 'Authorization': `Bearer ${getCookie("jwt")}`
-            }
+            },
+            withCredentials: true
         })
         .then(resp => setUserSummary(resp.data))
     }, [])

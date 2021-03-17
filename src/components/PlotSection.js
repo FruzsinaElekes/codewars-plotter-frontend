@@ -15,7 +15,7 @@ export default function PlotSection({ languages }) {
 
     const username = process.env.REACT_APP_USERNAME
     const apiKey = process.env.REACT_APP_APIKEY
-    const urlList = languages.map(language => `http://localhost:8080/plot/${language}?username=${username}&apiKey=${apiKey}`)
+    const urlList = languages.map(language => `http://localhost:8080/plot/${language}`)
 
     useEffect(() => {
         if (plotList.length === 0){
@@ -25,7 +25,8 @@ export default function PlotSection({ languages }) {
                     url: url,
                     headers: {
                         'Authorization': `Bearer ${getCookie("jwt")}`
-                    }
+                    },
+                    withCredentials: true
                 })
                 .then(resp => setPlotList(prev => [...prev, resp.data]))
             });

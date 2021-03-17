@@ -21,7 +21,8 @@ export default function Login() {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value,
             },
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json'},
+            withCredentials: true
         })
         .then(response => handleSuccess(response))
         .catch(error => {
