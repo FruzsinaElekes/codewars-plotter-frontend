@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Route path="/" component={Navbar}/>
         <Route exact path="/" component={LandingPage}/>
-        <Route path="/stats" component={Stats} />
+        <Route path="/stats-page" component={Stats} />
         <Route path="/login-page" component={Login} />
         <Route path="/registration-page" component={Registration} />
       </Router>

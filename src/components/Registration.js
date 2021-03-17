@@ -20,8 +20,8 @@ export default function Registration() {
             url: url,
             data: {
                 username: usernameRef.current.value,
-                password: apiKeyRef.current.value,
-                apiKey: passwordRef.current.value
+                password: passwordRef.current.value,
+                apiKey: apiKeyRef.current.value
             },
             headers: {'Content-Type': 'application/json'}
         })
