@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PlotSection from './PlotSection';
 import UserOverview from './UserOverview';
+import getCookie from '../util/getCookie';
 
 export default function Stats() {
 
@@ -11,10 +12,16 @@ export default function Stats() {
 
     useEffect(() => {
         const url = `http://localhost:8080/user/${username}?apiKey=${apiKey}`
-        axios.get(url)
+        axios({
+            method: 'get',
+            url: url,
+            headers: {
+                'Authorization': `Bearer ${getCookie("jwt")}`
+            },
+            withCredentials: true
+        })
         .then(resp => setUserSummary(resp.data))
     }, [])
-
 
     return (
         <React.Fragment>
