@@ -14,7 +14,6 @@ export default function LandingPage() {
     const setUser = useContext(UserContext)[1]
 
     const getUser = () => {
-        console.log(usernameRef.current.value)
         axios({
             method: 'get',
             url: userUrl + usernameRef.current.value
@@ -24,7 +23,7 @@ export default function LandingPage() {
             setToRedirect(true)
         })
         .catch(error => {
-            // non-existent username
+            alert(`Codewars username ${usernameRef.current.value} does not exist!`)
         })
     }
 
@@ -34,7 +33,7 @@ export default function LandingPage() {
             {toRedirect 
             ? <Redirect to="/stats-page" />
             : <RegFormContainer>
-                <div>This site helps you visualize your performance on Codewars (or that of your fellow warriors'). 
+                <div>This site helps you visualize your performance on Codewars (or that of your fellow warriors). 
                     The site uses the public endpoints of the Codewars API.</div>
                 <div>
                     <TextField inputRef={usernameRef} label="Codewars username"></TextField>
