@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import BarPlot from './BarPlot';
 import CollapsedPlot from './CollapsedPlot';
 import PlotMenu from './PlotMenu';
-import getCookie from '../../util/getCookie'
+import { UserContext } from '../userAuth/UserContext'
 
 export default function PlotSection({ languages }) {
 
@@ -12,21 +12,16 @@ export default function PlotSection({ languages }) {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const setCollapsed = () =>setIsCollapsed(true)
     const setNotCollapsed = () => setIsCollapsed(false)
+    const user = useContext(UserContext)[0]
 
-    const username = process.env.REACT_APP_USERNAME
-    const apiKey = process.env.REACT_APP_APIKEY
-    const urlList = languages.map(language => `http://localhost:8080/plot/${language}`)
+    const urlList = languages.map(language => `http://localhost:8080/users/${user.username}/plot/${language}`)
 
     useEffect(() => {
         if (plotList.length === 0){
             urlList.forEach(url => {
                 axios({
                     method: 'get',
-                    url: url,
-                    headers: {
-                        'Authorization': `Bearer ${getCookie("jwt")}`
-                    },
-                    withCredentials: true
+                    url: url
                 })
                 .then(resp => setPlotList(prev => [...prev, resp.data]))
             });
