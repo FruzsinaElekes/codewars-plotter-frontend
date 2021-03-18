@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PlotSection from './PlotSection';
 import UserOverview from './UserOverview';
 import {UserContext} from '../userAuth/UserContext'
+import { Redirect } from 'react-router';
 
 export default function Stats() {
 
@@ -10,12 +11,12 @@ export default function Stats() {
 
     return (
         <React.Fragment>
-            {user !== {}
+            {Object.keys(user).length > 0
             ? <div>
                 <UserOverview userSummary={user}/>
                 <PlotSection languages={(user.languageRanks).map(lr => lr.language)}/>
             </div>
-            : <div>Loading data</div>
+            : <Redirect to='/'></Redirect>
             }
         </React.Fragment>
     )
