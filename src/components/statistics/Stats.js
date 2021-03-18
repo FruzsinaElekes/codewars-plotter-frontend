@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PlotSection from './PlotSection';
 import UserOverview from './UserOverview';
-import getCookie from '../util/getCookie';
+import getCookie from '../../util/getCookie';
 
 export default function Stats() {
 

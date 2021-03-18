@@ -1,9 +1,9 @@
-import Stats from './components/Stats'
+import Stats from './components/statistics/Stats'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
-import LandingPage from './components/LandingPage';
+import LandingPage from './components/userAuth/LandingPage';
 import Navbar from './components/Navbar';
-import Registration from './components/Registration';
-import Login from './components/Login';
+import Registration from './components/userAuth/Registration';
+import Login from './components/userAuth/Login';
 
 function App() {
   return (

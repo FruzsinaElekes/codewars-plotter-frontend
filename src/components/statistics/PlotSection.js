@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import BarPlot from './BarPlot';
 import CollapsedPlot from './CollapsedPlot';
 import PlotMenu from './PlotMenu';
-import getCookie from '../util/getCookie'
+import getCookie from '../../util/getCookie'
 
 export default function PlotSection({ languages }) {
 
