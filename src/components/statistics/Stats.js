@@ -1,34 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import PlotSection from './PlotSection';
 import UserOverview from './UserOverview';
-import getCookie from '../../util/getCookie';
+import {UserContext} from '../userAuth/UserContext'
 
 export default function Stats() {
 
-    const [userSummary, setUserSummary] = useState(0);
-    const username = process.env.REACT_APP_USERNAME
-    const apiKey = process.env.REACT_APP_APIKEY
+    const user = useContext(UserContext)[0]
 
-    useEffect(() => {
-        const url = `http://localhost:8080/user`
-        axios({
-            method: 'get',
-            url: url,
-            headers: {
-                'Authorization': `Bearer ${getCookie("jwt")}`
-            },
-            withCredentials: true
-        })
-        .then(resp => setUserSummary(resp.data))
-    }, [])
 
     return (
         <React.Fragment>
-            {userSummary !== 0
+            {user !== {}
             ? <div>
-                <UserOverview userSummary={userSummary}/>
-                <PlotSection languages={(userSummary.languageRanks).map(lr => lr.language)}/>
+                <UserOverview userSummary={user}/>
+                <PlotSection languages={(user.languageRanks).map(lr => lr.language)}/>
             </div>
             : <div>Loading data</div>
             }
