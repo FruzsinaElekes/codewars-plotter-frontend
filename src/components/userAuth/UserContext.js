@@ -5,10 +5,12 @@ export const UserContext = React.createContext();
 
 export const UserProvider = (props) => {
     
-    const [user, setUser] = useState({})
+    const [userSummary, setUserSummary] = useState({})
+    const [userPlots, setUserPlots] = useState([])
+    const [userCompleted, setUserCompleted] = useState([])
 
     return (
-        <UserContext.Provider value={[user, setUser]}>
+        <UserContext.Provider value={[userSummary, setUserSummary, userPlots, setUserPlots, userCompleted, setUserCompleted]}>
             {props.children}
         </UserContext.Provider>
     )
