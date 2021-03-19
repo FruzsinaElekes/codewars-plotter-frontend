@@ -49,21 +49,21 @@ export default function KataFinder() {
                 <FormControl>
                     <InputLabel>Language</InputLabel>
                     <Select value={language} onChange={handleLanguageChange}>
-                        {languageOptions.map(o => <MenuItem value={o}>{o}</MenuItem>)}
+                        {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>
                 <FormControl>
                     <InputLabel>Rank</InputLabel>
                     <Select value={rank} onChange={handleRankChange}>
-                        {rankOptions.map(o => <MenuItem value={o}>{o}</MenuItem>)}
+                        {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>
             
             </FilterMenu>
             <div>
-                {filtered !== [] 
+                {filtered.length !== 0
                 ? filtered.map(k => <KataDescription key={k.codewarsId} kata = {k}/>)    
-                : "Loading data"
+                : <Feedback>There are no katas matching the conditions</Feedback>
             }
             </div>
         </div>
@@ -76,4 +76,9 @@ const FilterMenu = styled.div`
     width: 30%;
     display: flex;
     justify-content: space-evenly;
+`
+
+const Feedback = styled.div`
+    margin: 5em auto;
+    
 `
