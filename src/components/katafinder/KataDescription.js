@@ -9,19 +9,21 @@ export default function KataDescription({ kata }) {
     const toggleVisibility = () => setVisible(prev => !prev)
 
     return (
-        <div>
+        <KataContainer>
             <Header>
-                <a href={kata.url}>{kata.name}</a>
-                <div>{kata.rank}</div>
-                <div>{kata.completedAt.replace("T", " ")}</div>
-                {visible ? <BsFillCaretUpFill onClick={toggleVisibility}/> : <BsFillCaretDownFill onClick={toggleVisibility}/>}
+                <Data>
+                    <a href={kata.url}>{kata.name}</a>
+                    <div>{kata.rank}</div>
+                    <div>{kata.completedAt.replace("T", " ")}</div>
+                </Data>
+                {visible ? <Icon><BsFillCaretUpFill onClick={toggleVisibility}/></Icon> : <Icon><BsFillCaretDownFill onClick={toggleVisibility}/></Icon>}
             </Header>
             <Details visible={visible}>
                 <div>Completed languages: {kata.completedLanguages.join(", ")}</div>
                 <div>Tags: {kata.tags.join(", ")}</div>
                 <ReactMarkdown>{kata.description}</ReactMarkdown>
             </Details>
-        </div>
+        </KataContainer>
     )
 }
 
@@ -31,4 +33,19 @@ const Header = styled.div`
 
 const Details = styled.div`
     display: ${props => props.visible ? "block" : "none"}
+`
+
+const KataContainer = styled.div`
+    width: 50%;
+    margin: 1em auto 0
+`
+
+const Icon = styled.div`
+    float: right
+`
+
+const Data = styled.div`
+    width: 70%;
+    display: flex;
+    justify-content: space-between
 `
