@@ -44,7 +44,7 @@ export default function KataFinder() {
     }
 
     return (
-        <div>
+        <FinderContainer>
             <FilterMenu>
                 <FormControl>
                     <InputLabel>Language</InputLabel>
@@ -63,22 +63,19 @@ export default function KataFinder() {
             <div>
                 {filtered.length !== 0
                 ? filtered.map(k => <KataDescription key={k.codewarsId} kata = {k}/>)    
-                : <Feedback>There are no katas matching the conditions</Feedback>
+                : <p></p>
             }
             </div>
-        </div>
+        </FinderContainer>
 
     )
 }
 
-
+const FinderContainer = styled.div`
+    margin: 4em auto;
+`
 const FilterMenu = styled.div`
     width: 30%;
     display: flex;
     justify-content: space-evenly;
-`
-
-const Feedback = styled.div`
-    margin: 5em auto;
-    
 `

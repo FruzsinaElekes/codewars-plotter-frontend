@@ -32,21 +32,32 @@ export default function LandingPage() {
         <React.Fragment>
             {toRedirect 
             ? <Redirect to="/stats-page" />
-            : <RegFormContainer>
-                <div>This site helps you visualize your performance on Codewars (or that of your fellow warriors). 
-                    The site uses the public endpoints of the Codewars API.</div>
-                <div>
-                    <TextField inputRef={usernameRef} label="Codewars username"></TextField>
-                </div>
-                <div>
-                    <Button onClick={getUser}>Let's see!</Button>
-                </div>
-            </RegFormContainer>}
+            : <LandingContainer>
+                <p>This site helps you visualize your performance on Codewars (or that of your fellow warriors). </p>
+                <p> The site uses the public endpoints of the Codewars API.</p>
+                <RegFormContainer>
+                    <div>
+                        <TextField inputRef={usernameRef} label="Codewars username"></TextField>
+                    </div>
+                    <div>
+                        <Button  onClick={getUser}>Let's see!</Button>
+                    </div>
+                </RegFormContainer>
+            </LandingContainer>}
         </React.Fragment>
     )
 }
 
+const LandingContainer = styled.div`
+    width: 700px;
+    margin: 5em auto;
+    padding: 2em;
+    text-align: center;
+    
+`
+
 const RegFormContainer = styled.div`
-    width: 300px;
+    width: 50%;
     margin: auto;
+    text-align:left;
 `

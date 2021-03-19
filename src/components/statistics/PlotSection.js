@@ -49,7 +49,7 @@ const PlotGrid = styled.div`
 `
 
 const PlotContainer = styled.div`
-    margin: auto;
+    margin: 4em auto;
     width: 60vw;
     display:flex
 `
