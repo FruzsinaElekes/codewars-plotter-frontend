@@ -6,15 +6,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import styled from 'styled-components'
 
 export default function KataFinder() {
 
-    const user = useContext(UserContext)[0]
-    const [allKatas, setAllKatas] = useState([])
+    const userSummary = useContext(UserContext)[0]
+    const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
 
     const [language, setLanguage] = useState("none")
-    const languageOptions = [...user.languageRanks.map(r => r.language), "none"]
+    const languageOptions = [...userSummary.languageRanks.map(r => r.language), "none"]
     const handleLanguageChange = (event) => setLanguage(event.target.value)
 
     const [rank, setRank] = useState("none")
@@ -22,21 +23,21 @@ export default function KataFinder() {
     const handleRankChange = (event) => setRank(event.target.value)
 
     useEffect(() => {
-        fetchAllKatas()
+        if (userCompleted.length === 0) fetchAllKatas()
     }, [])
 
     useEffect(() => {
-        let filteredList = allKatas;
+        let filteredList = userCompleted;
         if (language !== "none") filteredList = filteredList.filter(kata => kata.completedLanguages.includes(language))
         if (rank !== "none") filteredList = filteredList.filter(kata => kata.rank === rank)
         setFiltered(filteredList)
     }, [language, rank])
 
     const fetchAllKatas = () => {
-        const url = `http://localhost:8080/users/${user.username}/katas`
+        const url = `http://localhost:8080/users/${userSummary.username}/katas`
         axios.get(url)
             .then(response => {
-                setAllKatas(response.data)
+                setUserCompleted(response.data)
                 setFiltered(response.data)
             })
             .catch(error => alert("Username does not exist"))
@@ -44,7 +45,7 @@ export default function KataFinder() {
 
     return (
         <div>
-            <div>
+            <FilterMenu>
                 <FormControl>
                     <InputLabel>Language</InputLabel>
                     <Select value={language} onChange={handleLanguageChange}>
@@ -58,7 +59,7 @@ export default function KataFinder() {
                     </Select>
                 </FormControl>
             
-            </div>
+            </FilterMenu>
             <div>
                 {filtered !== [] 
                 ? filtered.map(k => <KataDescription key={k.codewarsId} kata = {k}/>)    
@@ -69,3 +70,10 @@ export default function KataFinder() {
 
     )
 }
+
+
+const FilterMenu = styled.div`
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+`

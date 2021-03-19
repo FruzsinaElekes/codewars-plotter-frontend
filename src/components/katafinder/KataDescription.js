@@ -9,7 +9,7 @@ export default function KataDescription({ kata }) {
     const toggleVisibility = () => setVisible(prev => !prev)
 
     return (
-        <KataContainer>
+        <KataContainer visible={visible}>
             <Header>
                 <Data>
                     <a href={kata.url}>{kata.name}</a>
@@ -37,15 +37,15 @@ const Details = styled.div`
 
 const KataContainer = styled.div`
     width: 50%;
-    margin: 1em auto 0
+    margin: ${props => props.visible ? "3em auto 3em" : "1em auto 0"}
 `
 
 const Icon = styled.div`
-    float: right
+    margin-left:auto
 `
 
 const Data = styled.div`
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: space-between
 `
