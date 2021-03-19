@@ -8,22 +8,21 @@ import { UserContext } from '../userAuth/UserContext'
 
 export default function PlotSection({ languages }) {
 
-    const [plotList, setPlotList] = useState([]);
     const [isCollapsed, setIsCollapsed] = useState(false)
     const setCollapsed = () =>setIsCollapsed(true)
     const setNotCollapsed = () => setIsCollapsed(false)
-    const user = useContext(UserContext)[0]
+    const [userSummary, setUserSummary, userPlots, setUserPlots] = useContext(UserContext)
 
-    const urlList = languages.map(language => `http://localhost:8080/users/${user.username}/plot/${language}`)
+    const urlList = languages.map(language => `http://localhost:8080/users/${userSummary.username}/plot/${language}`)
 
     useEffect(() => {
-        if (plotList.length === 0){
+        if (userPlots.length === 0){
             urlList.forEach(url => {
                 axios({
                     method: 'get',
                     url: url
                 })
-                .then(resp => setPlotList(prev => [...prev, resp.data]))
+                .then(resp => setUserPlots(prev => [...prev, resp.data]))
             });
         }
     }, [])
@@ -32,9 +31,9 @@ export default function PlotSection({ languages }) {
         <PlotContainer>
             {!isCollapsed
             ? <PlotGrid>
-                {plotList.map(p => <BarPlot key = {p.language} plotData = {p}/>)}
+                {userPlots.map(p => <BarPlot key = {p.language} plotData = {p}/>)}
             </PlotGrid>
-            : <CollapsedPlot plotList={plotList}></CollapsedPlot>}
+            : <CollapsedPlot plotList={userPlots}></CollapsedPlot>}
             <PlotMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} setNotCollapsed={setNotCollapsed}/>
         </PlotContainer>
     )
