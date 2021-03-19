@@ -4,13 +4,17 @@ import { UserContext } from './userAuth/UserContext'
 
 export default function Navbar() {
 
-    const [user, setUser] = useContext(UserContext)
-    const [isVisible, setIsVisible] = useState(Object.keys(user).length !== 0)
-    const deleteUser = () => setUser({})
+    const [userSummary, setUserSummary, userPlots, setUserPlots, userCompleted, setUserCompleted] = useContext(UserContext)
+    const [isVisible, setIsVisible] = useState(Object.keys(userSummary).length !== 0)
+    const deleteUser = () => {
+        setUserSummary({})
+        setUserPlots([])
+        setUserCompleted([])
+    }
     
     useEffect(() => {
-        setIsVisible(Object.keys(user).length !== 0)
-    }, [user])
+        setIsVisible(Object.keys(userSummary).length !== 0)
+    }, [userSummary])
 
     return (
         <div>
