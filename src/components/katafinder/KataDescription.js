@@ -12,7 +12,7 @@ export default function KataDescription({ kata }) {
         <KataContainer visible={visible}>
             <Header>
                 <Data>
-                    <a href={kata.url}>{kata.name}</a>
+                    <a href={kata.url} target="_blank">{kata.name}</a>
                     <div>{kata.rank}</div>
                     <div>{kata.completedAt.replace("T", " ")}</div>
                 </Data>
