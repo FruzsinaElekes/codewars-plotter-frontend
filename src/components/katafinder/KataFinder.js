@@ -19,8 +19,7 @@ export default function KataFinder() {
 
     const languageOptions = [...userSummary.languageRanks.map(r => r.language), "none"]
     const rankOptions = ["none", "1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
-    const handleLanguageChange = (event) => setFilterState(prev => ({ ...prev, "language": event.target.value}))
-    const handleRankChange = (event) => setFilterState(prev => ({ ...prev, "rank": event.target.value}))
+    const handleFilterChange = (event) => setFilterState(prev => ({ ...prev, [event.target.name]: event.target.value}))
 
     useEffect(() => {
         if (userCompleted.length === 0) fetchAllKatas()
@@ -46,13 +45,13 @@ export default function KataFinder() {
             <FilterMenu>
                 <FormControl>
                     <InputLabel>Language</InputLabel>
-                    <Select value={filterState.language} onChange={handleLanguageChange}>
+                    <Select name="language" value={filterState.language} onChange={handleFilterChange}>
                         {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>
                 <FormControl>
                     <InputLabel>Rank</InputLabel>
-                    <Select value={filterState.rank} onChange={handleRankChange}>
+                    <Select name="rank" value={filterState.rank} onChange={handleFilterChange}>
                         {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>
