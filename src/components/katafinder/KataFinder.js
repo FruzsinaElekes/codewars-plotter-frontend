@@ -7,9 +7,10 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import styled from 'styled-components'
+import { byLanguage, byRank } from '../../util/filters'
 
 export default function KataFinder() {
-
+    const filters = [byLanguage, byRank]
     const userSummary = useContext(UserContext)[0]
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
@@ -27,9 +28,8 @@ export default function KataFinder() {
     }, [])
 
     useEffect(() => {
-        let filteredList = userCompleted;
-        if (language !== "none") filteredList = filteredList.filter(kata => kata.completedLanguages.includes(language))
-        if (rank !== "none") filteredList = filteredList.filter(kata => kata.rank === rank)
+        const state = {"language": language, "rank": rank}
+        let filteredList = userCompleted.filter(kata => filters.every(f => f(kata, state)))
         setFiltered(filteredList)
     }, [language, rank])
 
