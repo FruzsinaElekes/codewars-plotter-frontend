@@ -15,23 +15,21 @@ export default function KataFinder() {
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
 
-    const [language, setLanguage] = useState("none")
-    const languageOptions = [...userSummary.languageRanks.map(r => r.language), "none"]
-    const handleLanguageChange = (event) => setLanguage(event.target.value)
+    const [filterState, setFilterState] = useState({"language": "none", "rank": "none"})
 
-    const [rank, setRank] = useState("none")
+    const languageOptions = [...userSummary.languageRanks.map(r => r.language), "none"]
     const rankOptions = ["none", "1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
-    const handleRankChange = (event) => setRank(event.target.value)
+    const handleLanguageChange = (event) => setFilterState(prev => ({ ...prev, "language": event.target.value}))
+    const handleRankChange = (event) => setFilterState(prev => ({ ...prev, "rank": event.target.value}))
 
     useEffect(() => {
         if (userCompleted.length === 0) fetchAllKatas()
     }, [])
 
     useEffect(() => {
-        const state = {"language": language, "rank": rank}
-        let filteredList = userCompleted.filter(kata => filters.every(f => f(kata, state)))
+        let filteredList = userCompleted.filter(kata => filters.every(f => f(kata, filterState)))
         setFiltered(filteredList)
-    }, [language, rank])
+    }, [filterState])
 
     const fetchAllKatas = () => {
         const url = `http://localhost:8080/users/${userSummary.username}/katas`
@@ -48,13 +46,13 @@ export default function KataFinder() {
             <FilterMenu>
                 <FormControl>
                     <InputLabel>Language</InputLabel>
-                    <Select value={language} onChange={handleLanguageChange}>
+                    <Select value={filterState.language} onChange={handleLanguageChange}>
                         {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>
                 <FormControl>
                     <InputLabel>Rank</InputLabel>
-                    <Select value={rank} onChange={handleRankChange}>
+                    <Select value={filterState.rank} onChange={handleRankChange}>
                         {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>
