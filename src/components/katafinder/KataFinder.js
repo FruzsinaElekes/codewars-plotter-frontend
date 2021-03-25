@@ -4,21 +4,23 @@ import { UserContext } from '../userAuth/UserContext';
 import KataDescription from './KataDescription';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components'
-import { byLanguages, byRank } from '../../util/filters'
-import FilterPanel from './FilterPanel'
+import { byLanguages, byRank, byTitle } from '../../util/filters'
+import SelectPanel from './SelectPanel'
+import { TextField } from '@material-ui/core';
 
 export default function KataFinder() {
-    const filters = [byLanguages, byRank]
+    const filters = [byLanguages, byRank, byTitle]
     const userSummary = useContext(UserContext)[0]
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [filterState, setFilterState] = useState({"rank": [], "languages": []})
+    const [filterState, setFilterState] = useState({"rank": [], "languages": [], "title": []})
 
     const languageOptions = userSummary.languageRanks.map(r => r.language)
     const rankOptions = ["1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
     const handleFilterChange = (event) => setFilterState(prev => ({ ...prev, [event.target.name]: event.target.value}))
-    const resetFilterState = () => setFilterState({"rank": [], "languages": []})
+    const handleTitleFilterChange = (event) => setFilterState(prev => ({ ...prev, "title": event.target.value}))
+    const resetFilterState = () => setFilterState({"rank": [], "languages": [], "title": []})
     const deleteFilter = (which) => setFilterState(prev => ({...prev, [which]: []}))
 
     useEffect(() => {
@@ -44,18 +46,19 @@ export default function KataFinder() {
     return (
         <FinderContainer>
             <FilterMenu>
-                <FilterPanel type="languages" 
+                <TextField label="title" value={filterState.title} onChange={handleTitleFilterChange} />
+                <SelectPanel type="languages" 
                             opts ={languageOptions} 
                             filterState={filterState} 
                             filterChange={handleFilterChange}
                             deleteFilter={deleteFilter}
-                            multiple="true"></FilterPanel>
-                <FilterPanel type="rank" 
+                            multiple="true"></SelectPanel>
+                <SelectPanel type="rank" 
                             opts ={rankOptions} 
                             filterState={filterState} 
                             filterChange={handleFilterChange}
                             deleteFilter={deleteFilter}
-                            multiple="false"></FilterPanel>
+                            multiple="false"></SelectPanel>
                 <Button onClick={resetFilterState}>Reset all</Button>
                 <p>Number of items found: {isLoading ? "loading data" : filtered.length}</p>
             </FilterMenu>
