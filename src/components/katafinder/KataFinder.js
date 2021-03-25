@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../userAuth/UserContext';
-import KataDescription from './KataDescription';
 import styled from 'styled-components'
 import Menu from './Menu'
+import KataList from './KataList'
 
 export default function KataFinder() {
     
@@ -30,12 +30,8 @@ export default function KataFinder() {
     return (
         <FinderContainer>
             <Menu isLoading={isLoading} filteredLength={filtered.length} setFiltered={setFiltered}></Menu>
-            <KataList>
-                {filtered.length !== 0
-                ? filtered.map(k => <KataDescription key={k.codewarsId} kata = {k}/>)    
-                : <p></p>
-            }
-            </KataList>
+            <KataList filtered={filtered}/>
+            <PlaceHolder />
         </FinderContainer>
 
     )
@@ -45,6 +41,7 @@ const FinderContainer = styled.div`
     display:flex;
     margin: 4em auto;
 `
-const KataList = styled.div`
-    width: 100%
+
+const PlaceHolder = styled.div`
+    width: 20%
 `

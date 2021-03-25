@@ -36,7 +36,7 @@ const Details = styled.div`
 `
 
 const KataContainer = styled.div`
-    width: 50%;
+    width: 70%;
     margin: ${props => props.visible ? "3em auto 3em" : "1em auto 0"}
 `
 
