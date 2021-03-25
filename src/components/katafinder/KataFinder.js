@@ -16,7 +16,7 @@ export default function KataFinder() {
     const userSummary = useContext(UserContext)[0]
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
-
+    const [isLoading, setIsLoading] = useState(true)
     const [filterState, setFilterState] = useState({"rank": [], "languages": []})
 
     const languageOptions = userSummary.languageRanks.map(r => r.language)
@@ -39,6 +39,7 @@ export default function KataFinder() {
             .then(response => {
                 setUserCompleted(response.data)
                 setFiltered(response.data)
+                setIsLoading(false)
             })
             .catch(error => alert("Username does not exist"))
     }
@@ -65,7 +66,7 @@ export default function KataFinder() {
                     <DelIcon />
                 </Panel>
                 <Button onClick={resetFilterState}>Reset all</Button>
-                <p>Number of items found: {filtered.length}</p>
+                <p>Number of items found: {isLoading ? "loading data" : filtered.length}</p>
             </FilterMenu>
             <KataList>
                 {filtered.length !== 0
