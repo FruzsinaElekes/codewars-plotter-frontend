@@ -23,6 +23,7 @@ export default function KataFinder() {
     const rankOptions = ["1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
     const handleFilterChange = (event) => setFilterState(prev => ({ ...prev, [event.target.name]: event.target.value}))
     const resetFilterState = () => setFilterState({"rank": [], "languages": []})
+    const deleteFilter = (which) => setFilterState(prev => ({...prev, [which]: []}))
 
     useEffect(() => {
         if (userCompleted.length === 0) fetchAllKatas()
@@ -54,7 +55,7 @@ export default function KataFinder() {
                             {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                         </Select>
                     </FormControl>
-                    <DelIcon />
+                    <DelIcon name="languages" onClick={() => deleteFilter("languages")} />
                 </Panel>
                 <Panel>
                     <FormControl style={{ 'width': '100%'}}>
@@ -63,7 +64,7 @@ export default function KataFinder() {
                             {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                         </Select>
                     </FormControl>
-                    <DelIcon />
+                    <DelIcon name="rank" onClick={() => deleteFilter("rank")} />
                 </Panel>
                 <Button onClick={resetFilterState}>Reset all</Button>
                 <p>Number of items found: {isLoading ? "loading data" : filtered.length}</p>
@@ -97,7 +98,8 @@ const Panel = styled.div`
 `
 
 const DelIcon = styled(FaRegTimesCircle)`
-    margin-left: 1em
+    margin-left: 1em;
+    cursor: pointer;
 `
 
 const KataList = styled.div`
