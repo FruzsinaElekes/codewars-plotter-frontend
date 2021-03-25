@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+## The Story
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Have you ever thought: _"If only I could see a visual depiction of my Codewars performance..."_? Look no further, this site is for you!
 
-## Available Scripts
+## Functionality
 
-In the project directory, you can run:
+The application uses the public endpoints of the Codewars API (https://dev.codewars.com/). All you need to do in order to access your own (or anyone else's) statistics is to type in the respective Codewars username on the landing page.
 
-### `npm start`
+### Stats Page
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+After entering the username on the landing page, you will be redirected to the stats page (unless the entered username is invalid - in this case you will be notified in an alert).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+On the top, you will see a header section with the most important information about the user, like username, honor, rank for each trained language etc..
 
-### `npm test`
+Below, you will see a plot for each trained language, number of completed katas broken down by rank. In a menu on the side you can also select to check the data in a collapsed view that allows easy comparison of languages.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Kata Finder
 
-### `npm run build`
+The Kata finder page is there to help you browse the katas you have completed along with their completion details (e.g. completed languages and time of first completion). The list is paginated.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can add filters to your search:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **title:** type in a phrase or word from the kata's title
+- **languages:** select one or more languages from the dropdown menu. E.g. java && python will result in katas completed in **both** languages
+- **rank:** select a rank you are insterested in.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The three types of filters can be combined for a fine-grained search.
 
-### `npm run eject`
+## Technical Details
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This is the frontend app created in React. The app uses a dedicated API, serving all requested information. The repository of the backend app can be found here: https://github.com/FruzsinaElekes/codewars-plotter-backend
