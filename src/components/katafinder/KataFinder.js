@@ -10,7 +10,7 @@ export default function KataFinder() {
     const userSummary = useContext(UserContext)[0]
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(userCompleted.length > 0 ? false: true)
     const [page, setPage] = useState(0)
 
     useEffect(() => {
