@@ -5,6 +5,7 @@ import SelectPanel from './SelectPanel'
 import styled from 'styled-components'
 import { UserContext } from '../userAuth/UserContext';
 import { byLanguages, byRank, byTitle } from '../../util/filters'
+import { FaRegTimesCircle } from 'react-icons/fa';
 
 
 
@@ -30,7 +31,10 @@ export default function Menu({isLoading, filteredLength, setFiltered}) {
 
     return (
         <FilterMenu>
-                <TextField label="title" value={filterState.title} onChange={handleTitleFilterChange} />
+                <Panel>
+                    <TextField label="title" value={filterState.title} onChange={handleTitleFilterChange} />
+                    <DelIcon onClick={() => deleteFilter("title")}></DelIcon>
+                </Panel>
                 <SelectPanel type="languages" 
                             opts ={languageOptions} 
                             filterState={filterState} 
@@ -55,4 +59,14 @@ const FilterMenu = styled.div`
     width: 20%;
     display: flex;
     flex-direction: column;
+`
+
+const DelIcon = styled(FaRegTimesCircle)`
+    margin-left: 1em;
+    cursor: pointer;
+`
+const Panel = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: baseline
 `
