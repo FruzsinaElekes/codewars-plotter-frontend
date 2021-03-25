@@ -9,6 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components'
 import { byLanguages, byRank } from '../../util/filters'
+import { FaRegTimesCircle } from 'react-icons/fa';
 
 export default function KataFinder() {
     const filters = [byLanguages, byRank]
@@ -16,12 +17,12 @@ export default function KataFinder() {
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
 
-    const [filterState, setFilterState] = useState({"rank": "none", "languages": []})
+    const [filterState, setFilterState] = useState({"rank": [], "languages": []})
 
-    const languageOptions = [...userSummary.languageRanks.map(r => r.language), "none"]
-    const rankOptions = ["none", "1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
+    const languageOptions = userSummary.languageRanks.map(r => r.language)
+    const rankOptions = ["1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
     const handleFilterChange = (event) => setFilterState(prev => ({ ...prev, [event.target.name]: event.target.value}))
-    const resetFilterState = () => setFilterState({"rank": "none", "languages": []})
+    const resetFilterState = () => setFilterState({"rank": [], "languages": []})
 
     useEffect(() => {
         if (userCompleted.length === 0) fetchAllKatas()
@@ -45,36 +46,59 @@ export default function KataFinder() {
     return (
         <FinderContainer>
             <FilterMenu>
-                <FormControl>
-                    <InputLabel>Languages</InputLabel>
-                    <Select name="languages" multiple="true" value={filterState.languages} onChange={handleFilterChange}>
-                        {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
-                    </Select>
-                </FormControl>
-                <FormControl>
-                    <InputLabel>Rank</InputLabel>
-                    <Select name="rank" value={filterState.rank} onChange={handleFilterChange}>
-                        {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
-                    </Select>
-                </FormControl>
-                <Button onClick={resetFilterState}>Reset</Button>
+                <Panel>
+                    <FormControl style={{ 'width': '100%'}}>
+                        <InputLabel>Languages</InputLabel>
+                        <Select name="languages" multiple="true" value={filterState.languages} onChange={handleFilterChange}>
+                            {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
+                        </Select>
+                    </FormControl>
+                    <DelIcon />
+                </Panel>
+                <Panel>
+                    <FormControl style={{ 'width': '100%'}}>
+                        <InputLabel>Rank</InputLabel>
+                        <Select name="rank" value={filterState.rank} onChange={handleFilterChange}>
+                            {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
+                        </Select>
+                    </FormControl>
+                    <DelIcon />
+                </Panel>
+                <Button onClick={resetFilterState}>Reset all</Button>
+                <p>Number of items found: {filtered.length}</p>
             </FilterMenu>
-            <div>
+            <KataList>
                 {filtered.length !== 0
                 ? filtered.map(k => <KataDescription key={k.codewarsId} kata = {k}/>)    
                 : <p></p>
             }
-            </div>
+            </KataList>
         </FinderContainer>
 
     )
 }
 
 const FinderContainer = styled.div`
+    display:flex;
     margin: 4em auto;
 `
 const FilterMenu = styled.div`
-    width: 40%;
+    padding-left: 2em;
+    width: 20%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+`
+
+const Panel = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: baseline
+`
+
+const DelIcon = styled(FaRegTimesCircle)`
+    margin-left: 1em
+`
+
+const KataList = styled.div`
+    width: 100%
 `

@@ -4,6 +4,6 @@ export const byLanguages = (kata, state) => {
 }
 
 export const byRank = (kata, state) => {
-    if (state.rank === "none") return true;
+    if (state.rank.length === 0) return true;
     return kata.rank === state.rank 
 }
