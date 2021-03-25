@@ -2,14 +2,10 @@ import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../userAuth/UserContext';
 import KataDescription from './KataDescription';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components'
 import { byLanguages, byRank } from '../../util/filters'
-import { FaRegTimesCircle } from 'react-icons/fa';
+import FilterPanel from './FilterPanel'
 
 export default function KataFinder() {
     const filters = [byLanguages, byRank]
@@ -48,24 +44,18 @@ export default function KataFinder() {
     return (
         <FinderContainer>
             <FilterMenu>
-                <Panel>
-                    <FormControl style={{ 'width': '100%'}}>
-                        <InputLabel>Languages</InputLabel>
-                        <Select name="languages" multiple="true" value={filterState.languages} onChange={handleFilterChange}>
-                            {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
-                        </Select>
-                    </FormControl>
-                    <DelIcon name="languages" onClick={() => deleteFilter("languages")} />
-                </Panel>
-                <Panel>
-                    <FormControl style={{ 'width': '100%'}}>
-                        <InputLabel>Rank</InputLabel>
-                        <Select name="rank" value={filterState.rank} onChange={handleFilterChange}>
-                            {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
-                        </Select>
-                    </FormControl>
-                    <DelIcon name="rank" onClick={() => deleteFilter("rank")} />
-                </Panel>
+                <FilterPanel type="languages" 
+                            opts ={languageOptions} 
+                            filterState={filterState} 
+                            filterChange={handleFilterChange}
+                            deleteFilter={deleteFilter}
+                            multiple="true"></FilterPanel>
+                <FilterPanel type="rank" 
+                            opts ={rankOptions} 
+                            filterState={filterState} 
+                            filterChange={handleFilterChange}
+                            deleteFilter={deleteFilter}
+                            multiple="false"></FilterPanel>
                 <Button onClick={resetFilterState}>Reset all</Button>
                 <p>Number of items found: {isLoading ? "loading data" : filtered.length}</p>
             </FilterMenu>
@@ -89,17 +79,6 @@ const FilterMenu = styled.div`
     width: 20%;
     display: flex;
     flex-direction: column;
-`
-
-const Panel = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: baseline
-`
-
-const DelIcon = styled(FaRegTimesCircle)`
-    margin-left: 1em;
-    cursor: pointer;
 `
 
 const KataList = styled.div`
