@@ -11,6 +11,7 @@ export default function KataFinder() {
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [page, setPage] = useState(0)
 
     useEffect(() => {
         if (userCompleted.length === 0) fetchAllKatas()
@@ -29,8 +30,8 @@ export default function KataFinder() {
 
     return (
         <FinderContainer>
-            <Menu isLoading={isLoading} filteredLength={filtered.length} setFiltered={setFiltered}></Menu>
-            <KataList filtered={filtered}/>
+            <Menu isLoading={isLoading} filteredLength={filtered.length} setFiltered={setFiltered} setPage={setPage}></Menu>
+            <KataList filtered={filtered} page={page} setPage={setPage}/>
             <PlaceHolder />
         </FinderContainer>
 
