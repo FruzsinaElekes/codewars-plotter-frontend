@@ -7,15 +7,15 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import styled from 'styled-components'
-import { byLanguage, byRank } from '../../util/filters'
+import { byLanguages, byRank } from '../../util/filters'
 
 export default function KataFinder() {
-    const filters = [byLanguage, byRank]
+    const filters = [byLanguages, byRank]
     const userSummary = useContext(UserContext)[0]
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
 
-    const [filterState, setFilterState] = useState({"language": "none", "rank": "none"})
+    const [filterState, setFilterState] = useState({"language": "none", "rank": "none", "languages": []})
 
     const languageOptions = [...userSummary.languageRanks.map(r => r.language), "none"]
     const rankOptions = ["none", "1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
@@ -44,8 +44,8 @@ export default function KataFinder() {
         <FinderContainer>
             <FilterMenu>
                 <FormControl>
-                    <InputLabel>Language</InputLabel>
-                    <Select name="language" value={filterState.language} onChange={handleFilterChange}>
+                    <InputLabel>Languages</InputLabel>
+                    <Select name="languages" multiple="true" value={filterState.languages} onChange={handleFilterChange}>
                         {languageOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>

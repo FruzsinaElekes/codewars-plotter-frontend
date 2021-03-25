@@ -1,9 +1,9 @@
-export const byLanguage = (kata, state) => {
-    if (state.language === "none") return true;
-    return kata.completedLanguages.includes(state.language)
+export const byLanguages = (kata, state) => {
+    if (state.languages.length === 0) return true
+    return state.languages.every(lang => kata.completedLanguages.includes(lang))
 }
 
 export const byRank = (kata, state) => {
-    if (state.rank == "none") return true;
+    if (state.rank === "none") return true;
     return kata.rank === state.rank 
 }
