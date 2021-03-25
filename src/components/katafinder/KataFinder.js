@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 import styled from 'styled-components'
 import { byLanguages, byRank } from '../../util/filters'
 
@@ -15,11 +16,12 @@ export default function KataFinder() {
     const [userCompleted, setUserCompleted] = useContext(UserContext).slice(4,6)
     const [filtered, setFiltered] = useState([])
 
-    const [filterState, setFilterState] = useState({"language": "none", "rank": "none", "languages": []})
+    const [filterState, setFilterState] = useState({"rank": "none", "languages": []})
 
     const languageOptions = [...userSummary.languageRanks.map(r => r.language), "none"]
     const rankOptions = ["none", "1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
     const handleFilterChange = (event) => setFilterState(prev => ({ ...prev, [event.target.name]: event.target.value}))
+    const resetFilterState = () => setFilterState({"rank": "none", "languages": []})
 
     useEffect(() => {
         if (userCompleted.length === 0) fetchAllKatas()
@@ -55,7 +57,7 @@ export default function KataFinder() {
                         {rankOptions.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                     </Select>
                 </FormControl>
-            
+                <Button onClick={resetFilterState}>Reset</Button>
             </FilterMenu>
             <div>
                 {filtered.length !== 0
@@ -72,7 +74,7 @@ const FinderContainer = styled.div`
     margin: 4em auto;
 `
 const FilterMenu = styled.div`
-    width: 30%;
+    width: 40%;
     display: flex;
     justify-content: space-evenly;
 `
