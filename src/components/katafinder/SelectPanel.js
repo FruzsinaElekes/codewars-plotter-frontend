@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { FaRegTimesCircle } from 'react-icons/fa';
 
 
-export default function FilterPanel(props) {
+export default function SelectPanel(props) {
     const {type, opts, filterState, filterChange, deleteFilter, multiple} = props
 
     const selectMultiple = <Select 
