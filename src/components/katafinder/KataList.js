@@ -6,9 +6,13 @@ import { FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 export default function KataList({ filtered, page, setPage }) {
 
     
-    const itemNumber = 10
-    const pageUp = () => setPage(prev => prev + 1)
-    const pageDown = () => setPage(prev => prev - 1)
+    const itemNumber = 15
+    const pageUp = () => {
+        if (filtered.length > (page + 1) * itemNumber) setPage(prev => prev + 1)
+    }
+    const pageDown = () => {
+        if (page != 0) setPage(prev => prev - 1)
+    }
 
     return (
         <KataContainer>
