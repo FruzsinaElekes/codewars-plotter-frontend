@@ -9,7 +9,7 @@ import { FaRegTimesCircle } from 'react-icons/fa';
 
 
 
-export default function Menu({isLoading, filteredLength, setFiltered}) {
+export default function Menu({isLoading, filteredLength, setFiltered, setPage}) {
 
     const userSummary = useContext(UserContext)[0]
     const userCompleted = useContext(UserContext)[4]
@@ -27,6 +27,7 @@ export default function Menu({isLoading, filteredLength, setFiltered}) {
     useEffect(() => {
         let filteredList = userCompleted.filter(kata => filters.every(f => f(kata, filterState)))
         setFiltered(filteredList)
+        setPage(0)
     }, [filterState])
 
     return (
