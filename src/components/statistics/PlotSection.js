@@ -5,6 +5,8 @@ import BarPlot from './BarPlot';
 import CollapsedPlot from './CollapsedPlot';
 import PlotMenu from './PlotMenu';
 import { UserContext } from '../userAuth/UserContext'
+import VictoryPlot from './VictoryPlot'
+import VictoryCollapsed from './VictoryCollapsed';
 
 export default function PlotSection({ languages }) {
 
@@ -31,9 +33,9 @@ export default function PlotSection({ languages }) {
         <PlotContainer>
             {!isCollapsed
             ? <PlotGrid>
-                {userPlots.map(p => <BarPlot key = {p.language} plotData = {p}/>)}
+                {userPlots.map(p => <VictoryPlot key = {p.language} plotData = {p}/>)}
             </PlotGrid>
-            : <CollapsedPlot plotList={userPlots}></CollapsedPlot>}
+            : <VictoryCollapsed plotList={userPlots}></VictoryCollapsed>}
             <PlotMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} setNotCollapsed={setNotCollapsed}/>
         </PlotContainer>
     )
@@ -43,7 +45,7 @@ export default function PlotSection({ languages }) {
 const PlotGrid = styled.div`
     margin:auto;
     display: grid;
-    gap: 2em;
+    gap: 1em;
     grid-template-columns: 1fr 1fr;
     width: 80%;
 `
