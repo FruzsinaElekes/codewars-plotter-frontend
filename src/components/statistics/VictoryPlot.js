@@ -22,7 +22,8 @@ export default function VictoryPlot({plotData}) {
                 tickValues={["1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]}
                 />
             <VictoryBar horizontal
-                labels={({ datum }) => datum.y}
+                labels={({datum})  => datum.y}
+                labelComponent={<VictoryLabel/>}
                 barRatio = {0.8}
                 style={{
                     data: { fill: "#c43a31" }
