@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import BarPlot from './BarPlot';
-import CollapsedPlot from './CollapsedPlot';
 import PlotMenu from './PlotMenu';
 import { UserContext } from '../userAuth/UserContext'
 import VictoryPlot from './VictoryPlot'

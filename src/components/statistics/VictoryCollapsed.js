@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components';
 import { VictoryGroup, VictoryBar, VictoryChart, VictoryLegend, VictoryTooltip } from 'victory'
 
 export default function VictoryCollapsed({ plotList }) {
