@@ -15,17 +15,19 @@ export default function KataList({ filtered, page, setPage }) {
     }
 
     return (
-        <KataContainer>
-            {filtered.length !== 0
-                ? filtered.slice(page * itemNumber, page * itemNumber + itemNumber).map(k => <KataDescription key={k.codewarsId} kata = {k}/>)    
-                : <p></p>
-            }
-        <Chevrons>
-            <FaAngleLeft onClick={pageDown}></FaAngleLeft>
-            <div>{page + 1}</div>
-            <FaAngleRight onClick={pageUp}></FaAngleRight>
-        </Chevrons>
-        </KataContainer>
+        <React.Fragment>
+            {filtered.length !== 0 &&
+                <KataContainer>
+                {filtered.slice(page * itemNumber, page * itemNumber + itemNumber).map(k => <KataDescription key={k.codewarsId} kata = {k}/>)}
+                    <Chevrons>
+                        <FaAngleLeft onClick={pageDown}></FaAngleLeft>
+                        <div>{page + 1}</div>
+                        <FaAngleRight onClick={pageUp}></FaAngleRight>
+                    </Chevrons>
+            </KataContainer>
+        }
+        
+        </React.Fragment>
     )
 }
 
