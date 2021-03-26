@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import KataDescription from './KataDescription'
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 
 export default function KataList({ filtered, page, setPage }) {
 
-    
     const itemNumber = 15
     const pageUp = () => {
         if (filtered.length > (page + 1) * itemNumber) setPage(prev => prev + 1)
@@ -15,19 +14,17 @@ export default function KataList({ filtered, page, setPage }) {
     }
 
     return (
-        <React.Fragment>
+        <KataContainer>
             {filtered.length !== 0 &&
-                <KataContainer>
-                {filtered.slice(page * itemNumber, page * itemNumber + itemNumber).map(k => <KataDescription key={k.codewarsId} kata = {k}/>)}
+                <React.Fragment>
+                    {filtered.slice(page * itemNumber, page * itemNumber + itemNumber).map(k => <KataDescription key={k.codewarsId} kata = {k}/>)}
                     <Chevrons>
                         <FaAngleLeft onClick={pageDown}></FaAngleLeft>
                         <div>{page + 1}</div>
                         <FaAngleRight onClick={pageUp}></FaAngleRight>
                     </Chevrons>
-            </KataContainer>
-        }
-        
-        </React.Fragment>
+                </React.Fragment>}
+        </KataContainer>
     )
 }
 
