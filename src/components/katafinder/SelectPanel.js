@@ -8,26 +8,20 @@ import { FaRegTimesCircle } from 'react-icons/fa';
 
 
 export default function SelectPanel(props) {
-    const {type, opts, filterState, filterChange, deleteFilter, multiple} = props
+    const {type, opts, filterState, filterChange, deleteFilter, multi} = props
 
-    const selectMultiple = <Select 
-            name={type} 
-            multiple="true" 
-            value={filterState[type]} 
-            onChange={filterChange}>
-                {opts.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
-            </Select>
-    const selectSingle = <Select 
-            name={type} 
-            value={filterState[type]} 
-            onChange={filterChange}>
-                {opts.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
-            </Select>
     return (
         <Panel>
             <FormControl style={{ 'width': '100%'}}>
-                <InputLabel>{type}</InputLabel>
-                {multiple === "true" ? selectMultiple : selectSingle}
+                <InputLabel id={type}>{type}</InputLabel>
+                <Select 
+                    name={type} 
+                    labelId={type}
+                    multiple={multi} 
+                    value={filterState[type]} 
+                    onChange={filterChange}>
+                        {opts.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
+                </Select>
             </FormControl>
             <DelIcon name={type} onClick={() => deleteFilter(type)} />
         </Panel>

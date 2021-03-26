@@ -13,7 +13,7 @@ export default function Menu({isLoading, filteredLength, setFiltered, setPage}) 
 
     const userSummary = useContext(UserContext)[0]
     const userCompleted = useContext(UserContext)[4]
-    const [filterState, setFilterState] = useState({"rank": [], "languages": [], "title": []})
+    const [filterState, setFilterState] = useState({"rank": '', "languages": [], "title": []})
 
     const languageOptions = userSummary.languageRanks.map(r => r.language)
     const rankOptions = ["1 kyu", "2 kyu", "3 kyu", "4 kyu", "5 kyu", "6 kyu", "7 kyu", "8 kyu"]
@@ -21,8 +21,8 @@ export default function Menu({isLoading, filteredLength, setFiltered, setPage}) 
     
     const handleFilterChange = (event) => setFilterState(prev => ({ ...prev, [event.target.name]: event.target.value}))
     const handleTitleFilterChange = (event) => setFilterState(prev => ({ ...prev, "title": event.target.value}))
-    const resetFilterState = () => setFilterState({"rank": [], "languages": [], "title": []})
-    const deleteFilter = (which) => setFilterState(prev => ({...prev, [which]: []}))
+    const resetFilterState = () => setFilterState({"rank": '', "languages": [], "title": []})
+    const deleteFilter = (which) => setFilterState(prev => ({...prev, [which]: which === "rank" ? '' : []}))
 
     useEffect(() => {
         let filteredList = userCompleted.filter(kata => filters.every(f => f(kata, filterState)))
@@ -41,13 +41,13 @@ export default function Menu({isLoading, filteredLength, setFiltered, setPage}) 
                             filterState={filterState} 
                             filterChange={handleFilterChange}
                             deleteFilter={deleteFilter}
-                            multiple="true"></SelectPanel>
+                            multi={true}></SelectPanel>
                 <SelectPanel type="rank" 
                             opts ={rankOptions} 
                             filterState={filterState} 
                             filterChange={handleFilterChange}
                             deleteFilter={deleteFilter}
-                            multiple="false"></SelectPanel>
+                            multi={false}></SelectPanel>
                 <Button onClick={resetFilterState}>Reset all</Button>
                 <p>Number of items found: {isLoading ? "loading data" : filteredLength}</p>
             </FilterMenu>
