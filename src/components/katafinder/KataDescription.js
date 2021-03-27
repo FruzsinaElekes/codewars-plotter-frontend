@@ -11,16 +11,16 @@ export default function KataDescription({ kata }) {
     return (
         <KataContainer visible={visible}>
             <Header>
+                <StyledA href={kata.url} target="_blank">{kata.name}</StyledA>
                 <Data>
-                    <StyledA href={kata.url} target="_blank">{kata.name}</StyledA>
                     <div>{kata.rank}</div>
                     <div>{kata.completedAt.substring(0, kata.completedAt.indexOf("T"))}</div>
                 </Data>
                 {visible ? <Icon><BsFillCaretUpFill onClick={toggleVisibility}/></Icon> : <Icon><BsFillCaretDownFill onClick={toggleVisibility}/></Icon>}
             </Header>
             <Details visible={visible}>
-                <Chips>{kata.completedLanguages.map(lang => <Chip style={{ backgroundColor: "#d9392e", marginRight: "1em" }} label={lang} key={lang} />)}</Chips>
-                <Chips>{kata.tags.map(tag => <Chip style={{ backgroundColor: "gray", marginRight: "1em" }} label={tag} key={tag} />)}</Chips>
+                <Chips>{kata.completedLanguages.map(lang => <Chip style={langChip} label={lang} key={lang} />)}</Chips>
+                <Chips>{kata.tags.map(tag => <Chip style={tagChip} label={tag} key={tag} />)}</Chips>
                 
             </Details>
         </KataContainer>
@@ -34,9 +34,12 @@ const Header = styled.div`
     height: 2em;
     line-height: 2em;
     padding: 0 1em;
+    justify-content: space-between;
+
 `
 
 const StyledA = styled.a`
+    width: 60%;
     font-weight: bold;
     color: white;
     text-decoration: none;
@@ -52,7 +55,7 @@ const StyledA = styled.a`
 
 const Details = styled.div`
     display: ${props => props.visible ? "block" : "none"};
-    padding: 1em;
+    padding: 0 1em 1em 1em;
     background-color: rgb(40, 40, 40);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -60,7 +63,7 @@ const Details = styled.div`
 
 const KataContainer = styled.div`
     width: 70%;
-    margin: ${props => props.visible ? "3em auto 3em" : "1em auto 0"}
+    margin: 1em auto 0;
 `
 
 const Icon = styled.div`
@@ -72,14 +75,23 @@ const Icon = styled.div`
 `
 
 const Data = styled.div`
-    width: 80%;
+    width: 30%;
     display: flex;
     justify-content: space-between;
 `
 
 const Chips = styled.div`
-    margin-top: 1em;
     display: flex;
     flex-wrap: wrap;
 
 `
+
+const langChip = { 
+    backgroundColor: "#d9392e",
+    marginTop: "1em", 
+    marginRight: "1em" }
+
+const tagChip = { 
+    backgroundColor: "gray", 
+    marginTop: "1em", 
+    marginRight: "1em" }
