@@ -29,27 +29,35 @@ export default function PlotSection({ languages }) {
 
     return (
         <PlotContainer>
-            {!isCollapsed
-            ? <PlotGrid>
-                {userPlots.map(p => <VictoryPlot key = {p.language} plotData = {p}/>)}
-            </PlotGrid>
-            : <VictoryCollapsed plotList={userPlots}></VictoryCollapsed>}
+            <Plots>
+                {!isCollapsed
+                ? <PlotGrid>
+                    {userPlots.map(p => <VictoryPlot key = {p.language} plotData = {p}/>)}
+                </PlotGrid>
+                : <VictoryCollapsed plotList={userPlots}></VictoryCollapsed>}
+            </Plots>
             <PlotMenu isCollapsed={isCollapsed} setCollapsed={setCollapsed} setNotCollapsed={setNotCollapsed}/>
         </PlotContainer>
     )
 }
 
+const Plots = styled.div`
+    width: 80%;
+    margin:auto
+`
 
 const PlotGrid = styled.div`
     margin:auto;
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr 1fr;
-    width: 80%;
+    width: 90%;
 `
 
 const PlotContainer = styled.div`
-    margin: 4em auto;
-    width: 60vw;
+    position: relative;
+    left: max(20%, 360px);
+    margin: 4em 0;
+    width: calc(100% - max(20%, 360px));
     display:flex
 `
