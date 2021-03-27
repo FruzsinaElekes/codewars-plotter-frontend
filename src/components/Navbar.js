@@ -20,9 +20,11 @@ export default function Navbar() {
     return (
         <React.Fragment>
             {isVisible && <NavContainer>
-                <StyledLink onClick={deleteUser} to="/">Log out</StyledLink>
-                <StyledLink to="/stats-page">Statistics</StyledLink>
-                <StyledLink to="/kata-finder">Kata finder</StyledLink>
+                <LinkContainer>
+                    <StyledLink onClick={deleteUser} to="/">Log out</StyledLink>
+                    <StyledLink to="/stats-page">Statistics</StyledLink>
+                    <StyledLink to="/kata-finder">Kata finder</StyledLink>
+                </LinkContainer>
                 </NavContainer>
             }
         </React.Fragment>
@@ -33,6 +35,9 @@ export default function Navbar() {
 const NavContainer = styled.div`
     background-color: black;
     height: 50px;
+    position:fixed;
+    width: 100%;
+    z-index: 1
 `
 
 const StyledLink = styled(Link)`
@@ -40,9 +45,15 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     font-weight: bold;
     line-height:50px;
-    margin: 0 2em;
     & :visited {
         color: white;
         text-decoration: none;
     }
+`
+
+const LinkContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: max(20%, 360px);
+    padding: 0 2em
 `
