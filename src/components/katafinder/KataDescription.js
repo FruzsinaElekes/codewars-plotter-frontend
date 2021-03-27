@@ -41,10 +41,11 @@ const Header = styled.div`
 const StyledA = styled.a`
     width: 60%;
     font-weight: bold;
-    color: white;
+    color: #f0f0f0;
     text-decoration: none;
+    overflow: hidden;
     &:visited {
-        color: white;
+        color: #f0f0f0;
         text-decoration: none;
     }
     &:hover {
@@ -63,6 +64,7 @@ const Details = styled.div`
 
 const KataContainer = styled.div`
     width: 70%;
+    display: block;
     margin: 1em auto 0;
 `
 
