@@ -32,7 +32,6 @@ export default function KataFinder() {
         <FinderContainer>
             <Menu isLoading={isLoading} filteredLength={filtered.length} setFiltered={setFiltered} setPage={setPage}></Menu>
             <KataList filtered={filtered} page={page} setPage={setPage}/>
-            <PlaceHolder />
         </FinderContainer>
 
     )
@@ -40,9 +39,8 @@ export default function KataFinder() {
 
 const FinderContainer = styled.div`
     display:flex;
-    margin: 4em auto;
-`
-
-const PlaceHolder = styled.div`
-    width: 20%
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    top: 50px
 `
