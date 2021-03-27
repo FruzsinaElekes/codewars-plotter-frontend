@@ -29,7 +29,12 @@ export default function KataList({ filtered, page, setPage }) {
 }
 
 const KataContainer = styled.div`
-    width: 100%;
+    position: relative;
+    left: max(20%, 360px);
+    width: calc(100% - max(20%, 360px));
+    margin-top: 2em;
+    margin: 2 auto;
+    align-self: center
 `
 
 const Chevrons = styled.div`
