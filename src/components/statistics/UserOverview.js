@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Chip from '@material-ui/core/Chip'
 
 export default function UserOverview({ userSummary }) {
     console.log(userSummary.name)
@@ -12,8 +13,9 @@ export default function UserOverview({ userSummary }) {
                 <p>Position: #{userSummary.leaderboardPosition}</p>
                 <p>Completed: {userSummary.totalCompleted}</p>
             </Data>
+            <Chip style={avgRankChip} label={userSummary.overallRank.rankName}></Chip>
             <Languages>
-                {userSummary.languageRanks.map(r => <p>{r.language}: {r.rankName}</p>)}
+                {userSummary.languageRanks.map(r => <Chip style={rankChip} key={r.language} label={`${r.rankName} / ${r.language}`} ></Chip>)}
             </Languages>
         </OverView>
     )
@@ -21,10 +23,12 @@ export default function UserOverview({ userSummary }) {
 
 
 const OverView = styled.div`
-    display: flex;
+    position: fixed;
     background-color: rgb(33, 32, 32);
-    color: white;
-    padding-left: 2em
+    color: #f0f0f0;
+    width: max(20%, 360px);
+    min-height: 100vh;
+    padding: 0 2em
 `
 
 const Data = styled.div`
@@ -32,8 +36,20 @@ const Data = styled.div`
 `
 
 const Languages = styled.div`
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
-    justify-content: space-evenly
+    display: flex;
+    flex-direction: column
 `
+
+const rankChip = { 
+    fontSize: "1.2em",
+    backgroundColor: "gray", 
+    marginTop: "1em"
+}
+
+const avgRankChip = {
+    fontSize: "1.2em",
+    backgroundColor: "#d9392e", 
+    marginTop: "1em",
+    width: "100%"
+}
