@@ -34,7 +34,6 @@ const KataContainer = styled.div`
     width: calc(100% - max(20%, 360px));
     margin-top: 2em;
     margin: 2 auto;
-    align-self: center
 `
 
 const Chevrons = styled.div`

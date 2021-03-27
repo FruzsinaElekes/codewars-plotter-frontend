@@ -1,11 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import SelectPanel from './SelectPanel'
 import styled from 'styled-components'
 import { UserContext } from '../userAuth/UserContext';
 import { byLanguages, byRank, byTitle } from '../../util/filters'
-import { FaRegTimesCircle } from 'react-icons/fa';
+import TextPanel from './TextPanel';
 
 
 
@@ -32,42 +31,37 @@ export default function Menu({isLoading, filteredLength, setFiltered, setPage}) 
 
     return (
         <FilterMenu>
-                <Panel>
-                    <TextField label="title" value={filterState.title} onChange={handleTitleFilterChange} />
-                    <DelIcon onClick={() => deleteFilter("title")}></DelIcon>
-                </Panel>
-                <SelectPanel type="languages" 
-                            opts ={languageOptions} 
-                            filterState={filterState} 
-                            filterChange={handleFilterChange}
-                            deleteFilter={deleteFilter}
-                            multi={true}></SelectPanel>
-                <SelectPanel type="rank" 
-                            opts ={rankOptions} 
-                            filterState={filterState} 
-                            filterChange={handleFilterChange}
-                            deleteFilter={deleteFilter}
-                            multi={false}></SelectPanel>
-                <Button onClick={resetFilterState}>Reset all</Button>
-                <p>Number of items found: {isLoading ? "loading data" : filteredLength}</p>
-            </FilterMenu>
+            <TextPanel 
+                filterState={filterState} 
+                handleTitleFilterChange={handleTitleFilterChange} 
+                deleteFilter={deleteFilter}
+                type="title"></TextPanel>
+            <SelectPanel type="languages" 
+                        opts ={languageOptions} 
+                        filterState={filterState} 
+                        filterChange={handleFilterChange}
+                        deleteFilter={deleteFilter}
+                        multi={true}></SelectPanel>
+            <SelectPanel type="rank" 
+                        opts ={rankOptions} 
+                        filterState={filterState} 
+                        filterChange={handleFilterChange}
+                        deleteFilter={deleteFilter}
+                        multi={false}></SelectPanel>
+            <Button style={{ backgroundColor: "#d9392e", width: "50%", margin: "1em auto"}} onClick={resetFilterState}>Reset all</Button>
+            <p>Number of items found: {isLoading ? "loading data" : filteredLength}</p>
+        </FilterMenu>
     )
 }
 
 
 const FilterMenu = styled.div`
-    padding-left: 2em;
-    width: 20%;
+    position: fixed;
+    min-height: 100vh;
+    color: #f0f0f0;
+    background-color: rgb(33, 32, 32);
+    padding: 2em 2em;
+    width: max(20%, 360px);
     display: flex;
     flex-direction: column;
-`
-
-const DelIcon = styled(FaRegTimesCircle)`
-    margin-left: 1em;
-    cursor: pointer;
-`
-const Panel = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: baseline
 `

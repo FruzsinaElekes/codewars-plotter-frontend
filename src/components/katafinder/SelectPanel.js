@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,12 +10,15 @@ import { FaRegTimesCircle } from 'react-icons/fa';
 
 export default function SelectPanel(props) {
     const {type, opts, filterState, filterChange, deleteFilter, multi} = props
-
+    
     return (
         <Panel>
-            <FormControl style={{ 'width': '100%'}}>
-                <InputLabel id={type}>{type}</InputLabel>
+            <FormControl style={{ 'width': '100%', background: "gray", paddingLeft: "0.5em", color: "black"}}>
+                <InputLabel 
+                    style={{ paddingLeft: "0.5em", color: "black"}} 
+                    id={type}>{type}</InputLabel>
                 <Select 
+                    style={{ paddingLeft: "0.5em", color: "black"}}
                     name={type} 
                     labelId={type}
                     multiple={multi} 
@@ -35,5 +39,6 @@ const DelIcon = styled(FaRegTimesCircle)`
 const Panel = styled.div`
     width: 100%;
     display: flex;
-    align-items: baseline
+    align-items: baseline;
+    margin-top: 1em;
 `
