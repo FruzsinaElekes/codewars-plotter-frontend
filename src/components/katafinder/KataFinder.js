@@ -40,7 +40,7 @@ export default function KataFinder() {
 const FinderContainer = styled.div`
     display:flex;
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 50px);
     position: relative;
     top: 50px
 `
