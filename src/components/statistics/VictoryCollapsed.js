@@ -1,5 +1,6 @@
 import React from 'react'
 import { VictoryGroup, VictoryBar, VictoryChart, VictoryLegend, VictoryTooltip } from 'victory'
+import styled from 'styled-components'
 
 export default function VictoryCollapsed({ plotList }) {
     console.log(plotList[0].dataPoints)
@@ -9,6 +10,7 @@ export default function VictoryCollapsed({ plotList }) {
     const plotHeight = (barWidth + offSet/2) * 8 * plotList.length + 80
 
     return (
+        <ChartContainer>
         <VictoryChart padding={0, 50} height={plotHeight} domainPadding={domainPadding}>   
             <VictoryLegend 
                 y={10}
@@ -20,6 +22,7 @@ export default function VictoryCollapsed({ plotList }) {
                 />
             <VictoryGroup offset={offSet} colorScale="red">
                 {plotList.map(pd => <VictoryBar
+                    key ={pd.language}
                     sortKey="x"
                     sortOrder="descending"
                     horizontal 
@@ -30,7 +33,13 @@ export default function VictoryCollapsed({ plotList }) {
             </VictoryGroup>
             
         </VictoryChart>
+        </ChartContainer>
         
     )
 }
 
+
+const ChartContainer = styled.div`
+    width: 80%;
+    margin: auto
+`

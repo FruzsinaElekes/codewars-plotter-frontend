@@ -9,10 +9,12 @@ export default function VictoryPlot({plotData}) {
     }
     return (
         <VictoryChart
-            theme={VictoryTheme.material}
+            theme={VictoryTheme.grayscale}
             domainPadding={{ x: 20 }}
+            height={400}
+            style={{labels: { fontSize: 30 }}}
             >
-            <VictoryLabel text={plotData.language} style= {{fontSize: 20, fontWeight: "bold"}} x={50} y={20} textAnchor="middle"/>
+            <VictoryLabel text={plotData.language} style= {{fontSize: 30, fontWeight: "bold"}} x={80} y={20} textAnchor="middle"/>
             <VictoryAxis
                 dependentAxis
                 tickValues={ticks}
@@ -25,8 +27,11 @@ export default function VictoryPlot({plotData}) {
                 labels={({datum})  => datum.y}
                 labelComponent={<VictoryLabel/>}
                 barRatio = {0.8}
+                barWidth= {20}
+                height= {400}
                 style={{
-                    data: { fill: "#c43a31" }
+                    labels: { fontSize: "16"},
+                    data: { fill: "#cc3939" },
                     }}
                 data={plotData.dataPoints}
             />
