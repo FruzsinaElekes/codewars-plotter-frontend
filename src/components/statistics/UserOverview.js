@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import Chip from '@material-ui/core/Chip'
+import Loader from "react-loader-spinner";
 
 export default function UserOverview({ loadedLanguages, userSummary }) {
+    const loadingIcon = <Loader type="ThreeDots" color="black" height={26} width={26} ></Loader>
 
     return (
         <OverView>
@@ -19,12 +21,14 @@ export default function UserOverview({ loadedLanguages, userSummary }) {
                 <p>Completed: {userSummary.totalCompleted}</p>
                 {userSummary.skills.length > 0 && <p>Skills: {userSummary.skills.join(", ")}</p>}
             </Data>
-            <Chip style={avgRankChip} label={userSummary.overallRank.rankName}></Chip>
+            
+            <Chip  style={avgRankChip} label={userSummary.overallRank.rankName}></Chip>
             <Languages>
                 {userSummary.languageRanks.map(r => <Chip 
                                                         style={loadedLanguages.includes(r.language) ? rankChip : loadingChip} 
                                                         key={r.language} 
-                                                        label={`${r.rankName} / ${r.language}`} ></Chip>)}
+                                                        label={`${r.rankName} / ${r.language}`} 
+                                                        icon={loadedLanguages.includes(r.language) ? undefined : loadingIcon}></Chip>)}
             </Languages>
         </OverView>
     )
