@@ -32,32 +32,62 @@ export default function LandingPage() {
         <React.Fragment>
             {toRedirect 
             ? <Redirect to="/stats-page" />
-            : <LandingContainer>
-                <p>This site helps you visualize your performance on Codewars (or that of your fellow warriors). </p>
-                <p> The site uses the public endpoints of the Codewars API.</p>
+            :
+            <React.Fragment>
+            <TopPanel> 
+                <div><h1>Welcome to Codewars Plotter!</h1></div>
+            </TopPanel>
+            <LandingContainer>
+                <p>Visualize your performance on Codewars and browse completed katas!</p>
+                <p> The site uses the public endpoints of the <StyledA href="https://dev.codewars.com/" target="_blank">Codewars API</StyledA></p>
                 <RegFormContainer>
-                    <div>
-                        <TextField inputRef={usernameRef} label="Codewars username"></TextField>
-                    </div>
-                    <div>
-                        <Button  onClick={getUser}>Let's see!</Button>
-                    </div>
+                    <TextField style={{ textAlign: "center"}} inputRef={usernameRef} label="Codewars username"></TextField>
+                    <Button style={{ backgroundColor: "#d9392e", width: "50%", margin: "1em auto" }} onClick={getUser}>Let's see!</Button>
                 </RegFormContainer>
-            </LandingContainer>}
+            </LandingContainer>
+            </React.Fragment>
+            }
         </React.Fragment>
     )
 }
 
 const LandingContainer = styled.div`
+    position: relative;
+    top: 30vh;
     width: 700px;
-    margin: 5em auto;
+    margin: auto;
     padding: 2em;
     text-align: center;
     
+`
+const TopPanel = styled.div`
+    position:fixed;
+    top: 0;
+    margin-top: 0;
+    width: 100%;
+    height: 30vh;
+    background-color: rgb(33, 32, 32);
+    color: #f0f0f0;
+    text-align: center;
+    line-height: 30vh;
 `
 
 const RegFormContainer = styled.div`
     width: 50%;
     margin: auto;
-    text-align:left;
+    text-align:center;
+`
+const StyledA = styled.a`
+    width: 60%;
+    font-weight: bold;
+    color: #f0f0f0;
+    text-decoration: none;
+    overflow: hidden;
+    &:visited {
+        color: #f0f0f0;
+        text-decoration: none;
+    }
+    &:hover {
+        color: #eb4034;
+    }
 `
