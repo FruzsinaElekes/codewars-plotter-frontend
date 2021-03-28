@@ -49,7 +49,7 @@ export default function Menu({isLoading, filteredLength, setFiltered, setPage}) 
                         deleteFilter={deleteFilter}
                         multi={false}></SelectPanel>
             <Button style={{ backgroundColor: "#d9392e", width: "50%", margin: "1em auto"}} onClick={resetFilterState}>Reset all</Button>
-            <p>Number of items found: {isLoading ? "loading data" : filteredLength}</p>
+            <Feedback>{isLoading ? "loading ..." : filteredLength + " katas found"}</Feedback>
         </FilterMenu>
     )
 }
@@ -64,4 +64,12 @@ const FilterMenu = styled.div`
     width: max(20%, 360px);
     display: flex;
     flex-direction: column;
+`
+
+const Feedback = styled.div`
+    margin-top: 2em;
+    font-size: 1.2em;
+    color: #f0f0f0;
+    width: 100%;
+    text-align: center
 `
