@@ -7,11 +7,17 @@ export default function UserOverview({ userSummary }) {
     return (
         <OverView>
             <Data>
-                {userSummary.name !== null ? <p>{userSummary.name} aka {userSummary.username}</p> : <p>{userSummary.username}</p>}
-                <p>Clan: {userSummary.clan}</p>
+                <Name>
+                    <StyledA 
+                        href={`https://www.codewars.com/users/${userSummary.username}`} 
+                        target="_blank">{userSummary.username}</StyledA>
+                </Name>
+                {userSummary.name && <p>Name: {userSummary.name} </p>}
+                {userSummary.clan && <p>Clan: {userSummary.clan}</p>}
                 <p>Honor: {userSummary.honor}</p>
                 <p>Position: #{userSummary.leaderboardPosition}</p>
                 <p>Completed: {userSummary.totalCompleted}</p>
+                {userSummary.skills.length > 0 && <p>Skills: {userSummary.skills.join(", ")}</p>}
             </Data>
             <Chip style={avgRankChip} label={userSummary.overallRank.rankName}></Chip>
             <Languages>
@@ -32,7 +38,31 @@ const OverView = styled.div`
 `
 
 const Data = styled.div`
+    margin-top: 1em;
     width: 300px;
+    word-break: break-all; 
+    word-wrap: break-word;
+`
+
+const Name = styled.div`
+    height: 2.5em;
+    line-height: 2.5em;
+    font-size: 1.5em;
+`
+const StyledA = styled.a`
+    width: 60%;
+    font-weight: bold;
+    color: #f0f0f0;
+    text-decoration: none;
+    overflow: hidden;
+    &:visited {
+        color: #f0f0f0;
+        text-decoration: none;
+    }
+    &:hover {
+        color: #eb4034;
+        font-size: 1.1em; 
+    }
 `
 
 const Languages = styled.div`
