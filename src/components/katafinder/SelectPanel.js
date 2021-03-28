@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -27,7 +26,7 @@ export default function SelectPanel(props) {
                         {opts.map(o => <MenuItem key={o} value={o}>{o}</MenuItem>)}
                 </Select>
             </FormControl>
-            <DelIcon name={type} onClick={() => deleteFilter(type)} />
+            <DelIcon size={25} name={type} onClick={() => deleteFilter(type)} />
         </Panel>
     )
 }

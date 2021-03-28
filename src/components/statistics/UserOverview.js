@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Chip from '@material-ui/core/Chip'
 
 export default function UserOverview({ userSummary }) {
-    console.log(userSummary.name)
+
     return (
         <OverView>
             <Data>

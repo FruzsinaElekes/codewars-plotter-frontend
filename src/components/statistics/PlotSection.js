@@ -23,6 +23,7 @@ export default function PlotSection({ languages }) {
                     url: url
                 })
                 .then(resp => setUserPlots(prev => [...prev, resp.data]))
+                .catch(error => alert("Sorry, your plots could not be loaded properly"))
             });
         }
     }, [])
