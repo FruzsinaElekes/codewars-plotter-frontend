@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Chip from '@material-ui/core/Chip'
 
-export default function UserOverview({ userSummary }) {
+export default function UserOverview({ loadedLanguages, userSummary }) {
 
     return (
         <OverView>
@@ -21,7 +21,10 @@ export default function UserOverview({ userSummary }) {
             </Data>
             <Chip style={avgRankChip} label={userSummary.overallRank.rankName}></Chip>
             <Languages>
-                {userSummary.languageRanks.map(r => <Chip style={rankChip} key={r.language} label={`${r.rankName} / ${r.language}`} ></Chip>)}
+                {userSummary.languageRanks.map(r => <Chip 
+                                                        style={loadedLanguages.includes(r.language) ? rankChip : loadingChip} 
+                                                        key={r.language} 
+                                                        label={`${r.rankName} / ${r.language}`} ></Chip>)}
             </Languages>
         </OverView>
     )
@@ -77,6 +80,12 @@ const Languages = styled.div`
 const rankChip = { 
     fontSize: "1.2em",
     backgroundColor: "gray", 
+    marginTop: "1em"
+}
+
+const loadingChip = { 
+    fontSize: "1.2em",
+    backgroundColor: "#d65c54", 
     marginTop: "1em"
 }
 

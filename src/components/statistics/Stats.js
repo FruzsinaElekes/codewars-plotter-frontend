@@ -8,14 +8,21 @@ import styled from 'styled-components'
 export default function Stats() {
 
     const user = useContext(UserContext)[0]
+    const [userPlots, setUserPlots] = useContext(UserContext).slice(2,4)
 
+    const loadedLanguages = () => {
+        return userPlots.map(plot => plot.language)
+    }
 
     return (
         <React.Fragment>
             {Object.keys(user).length > 0
             ? <StatsContainer>
-                <UserOverview userSummary={user}/>
-                <PlotSection languages={(user.languageRanks).map(lr => lr.language)}/>
+                <UserOverview loadedLanguages={loadedLanguages()} userSummary={user}/>
+                <PlotSection 
+                    userPlots={userPlots} 
+                    setUserPlots={setUserPlots}
+                    languages={(user.languageRanks).map(lr => lr.language)}/>
             </StatsContainer>
             : <Redirect to='/'></Redirect>
             }

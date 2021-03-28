@@ -6,12 +6,12 @@ import { UserContext } from '../userAuth/UserContext'
 import VictoryPlot from './VictoryPlot'
 import VictoryCollapsed from './VictoryCollapsed';
 
-export default function PlotSection({ languages }) {
+export default function PlotSection({ languages, userPlots, setUserPlots }) {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
     const setCollapsed = () =>setIsCollapsed(true)
     const setNotCollapsed = () => setIsCollapsed(false)
-    const [userSummary, setUserSummary, userPlots, setUserPlots] = useContext(UserContext)
+    const userSummary = useContext(UserContext)[0]
 
     const urlList = languages.map(language => `http://localhost:8080/users/${userSummary.username}/plot/${language}`)
 
