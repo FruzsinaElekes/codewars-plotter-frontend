@@ -30,11 +30,14 @@ export default function UserOverview({ userSummary }) {
 
 const OverView = styled.div`
     position: fixed;
+    top:50px;
+    bottom: 0;
     background-color: rgb(33, 32, 32);
     color: #f0f0f0;
     width: max(20%, 360px);
     min-height: 100vh;
-    padding: 0 2em
+    padding: 0 2em;
+    overflow: auto
 `
 
 const Data = styled.div`
