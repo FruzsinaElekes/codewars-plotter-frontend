@@ -18,7 +18,8 @@ export default function KataFinder() {
     }, [])
 
     const fetchAllKatas = () => {
-        const url = `http://localhost:8080/users/${userSummary.username}/katas`
+        const baseUrl = process.env.REACT_APP_ORIGIN + process.env.REACT_APP_GET_USER
+        const url = baseUrl + userSummary.username + process.env.REACT_APP_GET_KATAS
         axios.get(url)
             .then(response => {
                 setUserCompleted(response.data)

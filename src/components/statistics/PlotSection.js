@@ -12,8 +12,10 @@ export default function PlotSection({ languages, userPlots, setUserPlots }) {
     const setCollapsed = () =>setIsCollapsed(true)
     const setNotCollapsed = () => setIsCollapsed(false)
     const userSummary = useContext(UserContext)[0]
+    const baseUrl = process.env.REACT_APP_ORIGIN + process.env.REACT_APP_GET_USER
+    const plotsUrl = process.env.REACT_APP_GET_PLOT
 
-    const urlList = languages.map(language => `http://localhost:8080/users/${userSummary.username}/plot/${language}`)
+    const urlList = languages.map(language => baseUrl + userSummary.username + plotsUrl + language)
 
     useEffect(() => {
         if (userPlots.length === 0){
@@ -23,7 +25,7 @@ export default function PlotSection({ languages, userPlots, setUserPlots }) {
                     url: url
                 })
                 .then(resp => setUserPlots(prev => [...prev, resp.data]))
-                .catch(error => alert("Sorry, your plots could not be loaded properly"))
+                .catch(error => alert("Sorry, a plot could not be loaded properly"))
             });
         }
     }, [])

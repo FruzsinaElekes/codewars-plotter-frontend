@@ -11,7 +11,7 @@ export default function UserOverview({ loadedLanguages, userSummary }) {
             <Data>
                 <Name>
                     <StyledA 
-                        href={`https://www.codewars.com/users/${userSummary.username}`} 
+                        href={process.env.REACT_APP_CW_USER + userSummary.username} 
                         target="_blank">{userSummary.username}</StyledA>
                 </Name>
                 {userSummary.name && <p>Name: {userSummary.name} </p>}

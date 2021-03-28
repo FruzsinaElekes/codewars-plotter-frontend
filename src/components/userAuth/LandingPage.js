@@ -39,7 +39,7 @@ export default function LandingPage() {
             </TopPanel>
             <LandingContainer>
                 <p>Visualize your performance on Codewars and browse completed katas!</p>
-                <p> The site uses the public endpoints of the <StyledA href="https://dev.codewars.com/" target="_blank">Codewars API</StyledA></p>
+                <p> The site uses the public endpoints of the <StyledA href={process.env.REACT_APP_CW_API} target="_blank">Codewars API</StyledA></p>
                 <RegFormContainer>
                     <TextField style={{ textAlign: "center"}} inputRef={usernameRef} label="Codewars username"></TextField>
                     <Button style={{ backgroundColor: "#d9392e", width: "50%", margin: "1em auto" }} onClick={getUser}>Let's see!</Button>
