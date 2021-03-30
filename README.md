@@ -29,3 +29,15 @@ The three types of filters can be combined for a fine-grained search.
 ## Technical Details
 
 This is the frontend app created in React. The app uses a dedicated API, serving all requested information. The repository of the backend app can be found here: https://github.com/FruzsinaElekes/codewars-plotter-backend
+
+### How to Run
+
+After cloning the repository, create a .env file based on the .env.template. If the backend server will not be running on http://localhost:8080, specify the required host and port in the REACT_APP_ORIGIN property.
+
+<pre><code>
+cd codewars_plotter_frontend
+npm install
+npm start
+</code></pre>
+
+The React server will start at: http://localhost:3000
